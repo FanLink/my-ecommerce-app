@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom';
 import CartItem from '../../components/CartItem';
 import { useDispatch, useSelector } from 'react-redux';
 import CountUp from 'react-countup';
-import { addToCart, removeFromCart } from '../../redux/cartSlice';
+import { changeQty, removeFromCart } from '../../redux/cartSlice';
 import SpinnerLoading from '../../components/commons/Spinner';
 const CartScreen = () => {
   const dispatch = useDispatch();
   const cart = useSelector(state => state.cart)
   const { cartItems, loading } = cart;
   const handleQtyChange = (id, qty) => {
-    dispatch(addToCart({ id, qty }))
+    dispatch(changeQty({ id, qty }))
   }
   const removeFromCartHandler = (id) => {
     dispatch(removeFromCart(id))
