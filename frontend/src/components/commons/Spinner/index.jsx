@@ -16,7 +16,7 @@ export default function SpinnerLoading() {
 
   return (
     <div className={classes.root}>
-      <LinearProgress />
+      <LinearProgress color="primary"/>
     </div>
   );
 }

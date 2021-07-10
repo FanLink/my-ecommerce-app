@@ -11,3 +11,6 @@ img{
   width: 100%;
   object-fit: contain;
 }
+main{
+  margin-top: 88px;
+}

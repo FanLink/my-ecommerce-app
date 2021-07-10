@@ -5,6 +5,7 @@
   "main": "server.js",
   "dependencies": {
     "@material-ui/core": "^4.11.4",
+    "@material-ui/icons": "^4.11.2",
     "@reduxjs/toolkit": "^1.6.0",
     "concurrently": "^6.2.0",
     "dotenv": "^10.0.0",

@@ -16,14 +16,13 @@ const HomeScreen = () => {
   }, [dispatch])
 
   return (
-    <> {loading ? <SpinnerLoading /> : error ? <h2>{error}</h2> :
+    <div> {loading ? <SpinnerLoading /> : error ? <h2>{error}</h2> :
       <div className="homescreen">
-        <h2 className="homescreen__title">Lastest Products</h2>
         <div className="homescreen_products">
           {products && products.map((product) => <Product key={product._id} product={product} />)}
         </div>
       </div>
-    }</>
+    }</div>
   );
 };
 

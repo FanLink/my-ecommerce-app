@@ -2,24 +2,22 @@ import {
   createAsyncThunk,
   createSlice
 } from "@reduxjs/toolkit";
-import axios from "axios";
-export const fetchAllProducts = createAsyncThunk("products/fetchAllProducts",
-  async () => {
-    try {
-      const {data} = await axios.get("/api/products")
-      return {
-          products: data,
-          loading: false
-      }
-    } catch (error) {
-      return {
-          error: error.response && error.response.data.message ? error.response.data.message : error.message,
-          loading: false
-      };
+import {Client} from "../apis";
+export const fetchAllProducts = createAsyncThunk("products/fetchAllProducts", async(_,{rejectWithValue}) => {
+  try {
+    const {data} = await Client.getProducts();
+    return {
+      products : data
     }
+  } catch (err) {
+      let error = err // cast the error for access
+      if (!error.response) {
+        throw err
+      }
+      // We got validation errors, let's return those so we can reference in our component and set form errors
+      return rejectWithValue(error.response.data)
   }
-);
-
+});
 
 const productSlice = createSlice({
   name: "products",
@@ -36,11 +34,12 @@ const productSlice = createSlice({
     })
     builder.addCase(fetchAllProducts.fulfilled, (state, action) => {
       state.products = action.payload.products;
-      state.loading = action.payload.loading;
+      state.loading = false;
     })
     builder.addCase(fetchAllProducts.rejected, (state, action) => {
-      state.error = action.payload.error;
-      state.loading = action.payload.loading;
+      if(action.payload) state.error = action.payload.errorMessage
+      state.error = action.error;
+      state.loading = false;
     })
   }
 })

@@ -10,6 +10,12 @@
   justify-content: space-between;
   flex-direction: column;
 }
+.product:hover {
+  transform: scale(1.03);
+}
+.product> a{
+  text-decoration: none;
+}
 
 .product > img {
   width: 100%;
@@ -39,17 +45,17 @@
   display: block;
   text-decoration: none;
   text-align: center;
-  color: #171717;
+  color: rgb(88, 228, 39);
   width: 100%;
   padding: 8px 16px;
-  background-color: #f4f4f4;
-  border: 1px solid #171717;
+  background-color: #171717;
+  border: 1px solid rgb(88, 228, 39);
   font-size: 1rem;
 }
 
 .info__button:hover {
-  background: #171717;
-  color: #f4f4f4;
+  background: rgb(88, 228, 39);
+  color: #171717;
 }
 
 @media (max-width: 1232px) {
@@ -100,7 +106,7 @@
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 300px) {
   .product {
     width: 300px;
   }

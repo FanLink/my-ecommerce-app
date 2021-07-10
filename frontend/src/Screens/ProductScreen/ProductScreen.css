@@ -37,6 +37,14 @@
 .right__info > p:last-child {
   border: none;
 }
+.left__genre{
+  display: inline-block;
+  border-radius: 15px;
+  margin: 0.5rem 0.5rem 0.5rem 0;
+  padding: 8px 15px;
+  background: #171717;
+  color: rgb(88, 228, 39);
+}
 
 .productscreen__right {
   flex: 0.2;
@@ -61,10 +69,14 @@
   width: 100%;
   padding: 10px 16px;
   background: #171717;
-  color: #f4f4f4;
-  border: 1px solid #171717;
+  color: rgb(88, 228, 39);
+  border: 1px solid rgb(88, 228, 39);
   cursor: pointer;
   border-radius: 5px;
+}
+.right__info p > button:hover {
+  background: rgb(88, 228, 39);
+  color: #171717;
 }
 
 .right__info select {

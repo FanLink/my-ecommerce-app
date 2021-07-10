@@ -9,6 +9,14 @@ import Navbar from './components/Navbar';
 import Backdrop from './components/Backdrop'
 import SideDrawer from './components/SideDrawer'
 import { useState } from 'react';
+import LoginScreen from './Screens/LoginScreen';
+// import { makeStyles } from '@material-ui/core';
+ 
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     marginTop: theme.spacing(11),
+//   }
+// }))
 function App() {
   const [sideToggle, setsideToggle] = useState(false);
 
@@ -25,6 +33,7 @@ function App() {
           <Route exact path="/" component={HomeScreen}></Route>
           <Route exact path="/product/:id" component={ProductScreen}></Route>
           <Route exact path="/cart" component={CartScreen}></Route>
+          <Route exact path="/login" component={LoginScreen}></Route>
         </Switch>
       </main>
     </Router>
