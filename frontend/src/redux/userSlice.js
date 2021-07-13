@@ -1,23 +1,25 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-
-const createUser = createAsyncThunk("users/createUser", async(user)=> {
-  try {
-    const {data} = await axios.post("url",user);
-    return {
-      user : data
+import { Client } from "../apis";
+export const getUser = createAsyncThunk("users/getUser", async(token, {rejectWithValue}) => {
+    try {
+      if(!token) return {data: localStorage.getItem("users")? localStorage.setItem("users") : {}}
+      const {data} = await Client.getUser(token);
+      return {data}
+    } catch (error) {
+      rejectWithValue(error.response.data)
     }
-  } catch (error) {
-    return 
-  }
-});
-// const getUser
+})
 const userSlice = createSlice({
   name: "users",
-  initialState: {},
+  initialState: {
+    user : {}
+  },
   reducers: {},
   extraReducers: (builder) => {
-
+      builder.addCase(getUser.fulfilled , (state, action) => {
+        state.user = action.payload.data;
+        localStorage.setItem("users", JSON.stringify(state.user))
+      })
   }
 })
 

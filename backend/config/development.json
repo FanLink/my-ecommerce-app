@@ -1,0 +1,4 @@
+{
+  "MONGO_URI": "mongodb+srv://user-123:user-123@cluster0.jxkmi.mongodb.net/shop?retryWrites=true&w=majority",
+ "JWT_SECRET": "47ab5fa97f2026b9d44d43b900153a8e24518709ece4692f79c9a34c38d09286f7edc4cd"
+}

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './HomeScreen.css'
 import Product from '../../components/Product';
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector, useDispatch, batch } from "react-redux"
 
 import SpinnerLoading from '../../components/commons/Spinner';
 import { fetchAllProducts } from '../../redux/productSlice';
@@ -12,17 +12,20 @@ const HomeScreen = () => {
   const { products, loading, error } = getProducts;
 
   useEffect(() => {
-    dispatch(fetchAllProducts())
+    batch(()=> {
+      dispatch(fetchAllProducts())
+    })  
   }, [dispatch])
-
   return (
-    <div> {loading ? <SpinnerLoading /> : error ? <h2>{error}</h2> :
+    <div> {loading ? <SpinnerLoading /> : error ? <h2>{error}</h2> :<>
       <div className="homescreen">
         <div className="homescreen_products">
           {products && products.map((product) => <Product key={product._id} product={product} />)}
         </div>
       </div>
+      </>
     }</div>
+
   );
 };
 

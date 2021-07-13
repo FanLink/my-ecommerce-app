@@ -1,7 +1,9 @@
 const constants = {
   "apis": {
     "products": "/api/products",
-    "users": ""
+    "users": "api/users",
+    "register": "api/auth/register",
+    "login": "api/auth/login"
   }
 }
 

@@ -47,7 +47,7 @@ const CartScreen = () => {
         <div className="cartscreen__right">
           <div className="cartscreen__info">
             <p>Subtotal {getSubTotal()} items</p>
-            <p>$<CountUp end={getTotalPrice()} duration={2} separator=" " decimals={2} /></p>
+            <p>${getTotalPrice()}</p>
           </div>
           <div>
             <button>Proceed To Checkout</button>
