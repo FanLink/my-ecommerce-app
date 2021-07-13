@@ -1,15 +1,16 @@
 import React from 'react'
 import Login from '../../components/Login';
-import {useDispatch} from "react-redux"
+import { useDispatch } from "react-redux"
 import "./style.css"
+import { userLogin } from '../../redux/tokenSlice';
 const LoginScreen = () => {
   const dispatch = useDispatch();
-  const onClickHandler = (accountInfo) => {
-    // dispatch(createUser(accountInfo))
+  const onSubmit = (values) => {
+    dispatch(userLogin(values))
   }
   return (
-    <div className ="login">
-      <Login onClickHandler = {onClickHandler} />
+    <div className="login">
+      <Login handleOnSubmit={onSubmit} />
     </div>
   )
 }

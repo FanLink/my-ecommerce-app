@@ -1,4 +1,4 @@
-.login {
+.register {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -16,7 +16,7 @@
           align-items: center;
 }
 
-.login__paper {
+.register__paper {
   border: 1px solid #58e427;
   border-radius: 20px;
   padding: 5rem 2rem;
@@ -57,10 +57,9 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  margin-bottom: 10px;
 }
 
 .button__spacing {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 /*# sourceMappingURL=style.css.map */
