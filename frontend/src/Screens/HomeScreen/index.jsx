@@ -12,18 +12,19 @@ const HomeScreen = () => {
   const { products, loading, error } = getProducts;
 
   useEffect(() => {
-    batch(()=> {
+    batch(() => {
       dispatch(fetchAllProducts())
-    })  
+    })
   }, [dispatch])
   return (
-    <div> {loading ? <SpinnerLoading /> : error ? <h2>{error}</h2> :<>
+    <div> {loading ? <SpinnerLoading /> : error ? <h2>{error}</h2> : <>
       <div className="homescreen">
+        {products.length === 0 ? <div className="homescreen__noresults">{"No results were returned for that search"}</div> : 
         <div className="homescreen_products">
-          {products && products.map((product) => <Product key={product._id} product={product} />)}
-        </div>
+          {products.map((product) => <Product key={product._id} product={product} />)}
+        </div>}
       </div>
-      </>
+    </>
     }</div>
 
   );

@@ -1,11 +1,14 @@
 import React, { useEffect } from 'react';
-import { Link } from "react-router-dom"
+import { Link, useRouteMatch } from "react-router-dom"
 import "./Navbar.css"
 import { useDispatch, useSelector } from 'react-redux';
 import SearchBar from '../SearchBar';
-import { getUser } from '../../redux/userSlice';
+import { getUser, logOutUser } from '../../redux/userSlice';
+import UserMenu from '../UserMenu';
+import { searchProducts } from '../../redux/productSlice';
 
 const Navbar = ({ handleToggle }) => {
+  const match = useRouteMatch();
   const cart = useSelector(state => state.cart);
   const { cartItems } = cart
   const getCartCount = () => {
@@ -16,9 +19,15 @@ const Navbar = ({ handleToggle }) => {
   const token = useSelector(state => state.token)
   const {jwtToken} = token;
   const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(logOutUser())
+  }
   useEffect(() => {
     dispatch(getUser(jwtToken))
   }, [dispatch, jwtToken])
+  const onSearchSubnit = (value) => {
+    dispatch(searchProducts(value))
+  }
   return (
     <nav className="navbar">
       {/* logo */}
@@ -27,7 +36,7 @@ const Navbar = ({ handleToggle }) => {
         <h3>Enjoy Your Time!</h3>
       </Link>
       {/* searchbar */}
-      <SearchBar className="narbar__searchbar" />
+      {match.isExact ? <SearchBar className="narbar__searchbar" onSearchSubnit= {onSearchSubnit}/> : ""}
       {/* links */}
       <ul className="navbar__links">
         <li>
@@ -41,7 +50,8 @@ const Navbar = ({ handleToggle }) => {
         </li>
         <li>
            {/* <Link to="/login"> */}
-          {user&&user.userName? <span style={{color: "rgb(88, 228, 39)", "font-size": "1.2rem"}}>{user.userName}</span> : <Link to="/login">
+          {user&&user.userName? <UserMenu userName = {user.userName}
+          handleLogout = {handleLogout} /> : <Link to="/login">
             Login
           </Link>
           }

@@ -7,6 +7,11 @@ const getProductById =(id) => {
   return axios.get(`${constants.apis.products}/${id}`)
 }
 
+const searchProducts = (searchTerm) => {
+  return axios.get(`${constants.apis.search}?filters=${searchTerm}`)
+  
+}
+
 const getUser = (token) => {
   return axios.get(constants.apis.users, {
     headers: {
@@ -28,5 +33,6 @@ export const Client = {
   getProductById,
   getUser,
   registUser,
-  userLogin
+  userLogin,
+  searchProducts
 }

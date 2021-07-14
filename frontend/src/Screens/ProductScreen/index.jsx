@@ -37,7 +37,7 @@ const ProductScreen = ({ match, history }) => {
             <p>Realease Date: {product.release}</p>
             <p>Developer: {product.developer}</p>
             <p>Genres: {product.genres && product.genres.map((genre) => (
-              <span className="left__genre">{genre}</span>
+              <span key={genre} className="left__genre">{genre}</span>
             ))}
             </p>
           </div>
@@ -46,9 +46,9 @@ const ProductScreen = ({ match, history }) => {
           <div className="right__info">
             <p>Price:<span>${product.price}</span></p>
             <p>Status: {product.countInStock ? <span> In Stock </span> : <span> Out Stock</span>}</p>
-            <p>Qty
+            <div className = "info__select">Qty:
               <CustomizedSelects value={qty} handleChange={(e) => setQty(e.target.value)} dataArr={product.countInStock} />
-            </p>
+            </div>
             <p>
               <button type="button" onClick={handleAddToCart}>Add to Cart</button>
             </p>

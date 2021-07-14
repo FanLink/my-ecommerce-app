@@ -64,6 +64,14 @@
   grid-template-columns: repeat(2, 1fr);
 }
 
+.info__select {
+  padding: 1rem;
+  font-size: 0.8rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  
+}
+
 .right__info p > button {
   grid-column: 1/-1;
   width: 100%;

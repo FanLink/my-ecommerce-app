@@ -18,9 +18,20 @@ const getProductById = async (req, res) => {
     throw error
   }
 }
+const searchProducts = async (req, res) => {
+  const searchTerm =  req.query.filters
+  try {
+    const products = await Product.find({name: {"$regex": searchTerm}})
+    return products
+  } catch (error) {
+    console.error(error);
+    throw error
+  }
+}
 
 
 module.exports = {
   getAllProducts,
-  getProductById
+  getProductById,
+  searchProducts
 }

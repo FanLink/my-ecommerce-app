@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import "./SearchBar.css"
 
-const SearchBar = () => {
+const SearchBar = ({onSearchSubnit}) => {
   const [searchTerm, setSearchTerm] = useState("");
   const onSearchHandler = (e) => {
     e.preventDefault();
-    console.log(searchTerm);
+    onSearchSubnit(searchTerm);
   }
   return (
     <div className="searchbar">
