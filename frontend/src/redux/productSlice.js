@@ -18,6 +18,19 @@ export const fetchAllProducts = createAsyncThunk("products/fetchAllProducts", as
       return rejectWithValue(error.response.data)
   }
 });
+export const searchProducts = createAsyncThunk("products/searchProducts", async(searchTerm,{rejectWithValue}) => {
+      try {
+        const {data} = await Client.searchProducts(searchTerm)
+        return {data}
+      } catch (err) {
+        let error = err // cast the error for access
+        if (!error.response) {
+          throw err
+        }
+        // We got validation errors, let's return those so we can reference in our component and set form errors
+        return rejectWithValue(error.response.data)
+      }
+})
 
 const productSlice = createSlice({
   name: "products",
@@ -37,6 +50,18 @@ const productSlice = createSlice({
       state.loading = false;
     })
     builder.addCase(fetchAllProducts.rejected, (state, action) => {
+      if(action.payload) state.error = action.payload.errorMessage
+      state.error = action.error;
+      state.loading = false;
+    })
+    builder.addCase(searchProducts.pending, (state, action) => {
+      state.loading = true;
+    })
+    builder.addCase(searchProducts.fulfilled, (state, action)=> {
+      state.products = action.payload.data;
+      state.loading = false
+    })
+    builder.addCase(searchProducts.rejected, (state,action)=> {
       if(action.payload) state.error = action.payload.errorMessage
       state.error = action.error;
       state.loading = false;

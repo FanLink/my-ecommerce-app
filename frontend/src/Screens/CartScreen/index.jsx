@@ -3,7 +3,6 @@ import "./CartScreen.css"
 import { Link } from 'react-router-dom';
 import CartItem from '../../components/CartItem';
 import { useDispatch, useSelector } from 'react-redux';
-import CountUp from 'react-countup';
 import { changeQty, removeFromCart } from '../../redux/cartSlice';
 import SpinnerLoading from '../../components/commons/Spinner';
 const CartScreen = () => {

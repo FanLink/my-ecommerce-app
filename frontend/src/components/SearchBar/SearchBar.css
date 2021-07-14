@@ -7,7 +7,7 @@
 .searchbar{
   width: 50%;
   height: auto;
-  margin-right: 8px;
+  /* margin-right: 8px; */
 }
 .searchbar__form{
   display: flex;
