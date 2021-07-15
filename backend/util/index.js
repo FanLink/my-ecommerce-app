@@ -1,4 +1,5 @@
 
 module.exports = {
-  asyncHandler: require("./async-handler")
+  asyncHandler: require("./async-handler"),
+  errorResponse: require("./errorResponse")
 }

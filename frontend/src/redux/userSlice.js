@@ -6,7 +6,10 @@ export const getUser = createAsyncThunk("users/getUser", async(token, {rejectWit
       const {data} = await Client.getUser(token);
       return {data}
     } catch (error) {
-      rejectWithValue(error.response.data)
+      if(error.response){
+        throw error;
+      }
+      return rejectWithValue(error.response.data)
     }
 })
 const userSlice = createSlice({
@@ -22,8 +25,12 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
       builder.addCase(getUser.fulfilled , (state, action) => {
-        state.user = action.payload.data;
+        state.user = action.payload.data ? action.payload.data : {};
         localStorage.setItem("users", JSON.stringify(state.user))
+      })
+      builder.addCase(getUser.rejected, (state, action) => {
+        if(action.payload) state.error = action.payload.errorMessage
+        state.error = action.error;
       })
   }
 })
