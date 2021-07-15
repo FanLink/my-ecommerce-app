@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import "./CartItem.css";
+import "./style.css";
 import CustomizedSelects from '../commons/Select';
 
 const CartItem = ({item,handleQtyChange,removeFromCartHandler}) => {

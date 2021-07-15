@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link, useRouteMatch } from "react-router-dom"
-import "./Navbar.css"
+import "./style.css"
 import { useDispatch, useSelector } from 'react-redux';
 import SearchBar from '../SearchBar';
 import { getUser, logOutUser } from '../../redux/userSlice';
@@ -15,7 +15,7 @@ const Navbar = ({ handleToggle }) => {
     return cartItems.length;
   }
   const userStore = useSelector(state => state.users)
-  const {user} = userStore;
+  let {user} = userStore;
   const token = useSelector(state => state.token)
   const {jwtToken} = token;
   const dispatch = useDispatch();

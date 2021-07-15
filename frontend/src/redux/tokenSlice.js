@@ -7,10 +7,19 @@ export const userRegiter = createAsyncThunk("token/userRigister", async(userInfo
         data
       }
 }) 
-export const userLogin = createAsyncThunk("token/userLogin", async(userInfo) => {
-  const {data} = await Client.userLogin(userInfo);
-  return {
-    data
+export const userLogin = createAsyncThunk("token/userLogin", async(userInfo, {rejectWithValue}) => {
+  try {
+    const {data} = await Client.userLogin(userInfo);
+    if (data) 
+    return {
+      data
+    }
+  } catch (err) {
+    let error = err;
+    if(!error.response){
+      throw err
+    }
+    return rejectWithValue(error.response.data)
   }
 }) 
 
@@ -25,7 +34,11 @@ const tokenSlice = createSlice({
       state.jwtToken = action.payload.data.token;
     })
     builder.addCase(userLogin.fulfilled, (state, action)=> {
-      state.jwtToken = action.payload.data.token;
+      action.payload ? state.jwtToken = action.payload.data.token : state.jwtToken = "";
+    })
+    builder.addCase(userLogin.rejected, (state, action)=> {
+      if(action.payload) state.error = action.payload.errorMessage
+      state.error = action.error  
     })
   }
 })
