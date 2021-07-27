@@ -1,7 +1,7 @@
 import axios from "axios"
 import constants from "../Constant";
-const getProducts = () => {
- return axios.get(constants.apis.products) 
+const getProducts = (currentPage) => {
+ return axios.get(`${constants.apis.products}?page=${currentPage}`) 
 }
 const getProductById =(id) => {
   return axios.get(`${constants.apis.products}/${id}`)
