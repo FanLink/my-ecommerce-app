@@ -51,7 +51,7 @@ const Navbar = ({ handleToggle }) => {
         <li>
            {/* <Link to="/login"> */}
           {user&&user.userName? <UserMenu userName = {user.userName}
-          handleLogout = {handleLogout} /> : <Link to="/login">
+            handleLogout = {handleLogout} /> : <Link to="/login">
             Login
           </Link>
           }

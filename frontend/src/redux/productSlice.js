@@ -3,11 +3,11 @@ import {
   createSlice
 } from "@reduxjs/toolkit";
 import {Client} from "../apis";
-export const fetchAllProducts = createAsyncThunk("products/fetchAllProducts", async(_,{rejectWithValue}) => {
+export const fetchAllProducts = createAsyncThunk("products/fetchAllProducts", async(currentPage,{rejectWithValue}) => {
   try {
-    const {data} = await Client.getProducts();
+    const {data} = await Client.getProducts(currentPage);
     return {
-      products : data
+      data
     }
   } catch (err) {
       let error = err // cast the error for access
@@ -36,6 +36,8 @@ const productSlice = createSlice({
   name: "products",
   initialState: {
     products: [],
+    page: 1,
+    totals: 1,
     error: "",
     loading: true
   },
@@ -46,7 +48,9 @@ const productSlice = createSlice({
       state.products = [];
     })
     builder.addCase(fetchAllProducts.fulfilled, (state, action) => {
-      state.products = action.payload.products;
+      state.products = action.payload.data.products;
+      state.page = action.payload.data.page;
+      state.totals = action.payload.data.pages;
       state.loading = false;
     })
     builder.addCase(fetchAllProducts.rejected, (state, action) => {
